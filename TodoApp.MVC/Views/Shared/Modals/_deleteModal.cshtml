@@ -1,0 +1,36 @@
+﻿
+@model string
+
+<!-- BEGIN DELETE MODAL-->
+
+<div id="deleteModal" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+                <h4 class="modal-title">حذف گذینه</h4>
+            </div>
+            <div class="modal-body">
+                <p>@Model</p>
+                <p>آیا از حذف این مورد اطمینان دارید ؟</p>
+            </div>
+            <div class="modal-footer">
+                <p class="text-right">
+                    <a href="#" id="deleteModalHref" class="btn btn-success btn-round">حذف کن<div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></a>
+                    <button type="button" class="btn btn-danger btn-round" data-bs-dismiss="modal">بیخیال<div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div></button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function GoDeleteModal(deleteLink) {
+        var modalRouteTag = document.getElementById("deleteModalHref");
+        modalRouteTag.setAttribute("href", deleteLink);
+    }
+</script>
+
+
+<!-- END DELETE MODAL-->

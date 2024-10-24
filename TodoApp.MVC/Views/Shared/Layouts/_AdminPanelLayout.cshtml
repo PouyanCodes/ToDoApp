@@ -1,0 +1,93 @@
+﻿
+@using TodoApp.MVC.Tools.Convertors
+
+<!DOCTYPE HTML>
+<html lang="fa" dir="rtl" class="rtl">
+
+<head>
+
+    <title>سیستم مدیریت | @ViewData["Title"]</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewData["Description"]">
+    <meta name="keywords" content="@ViewData["Keywords"]">
+    <meta name="fontiran.com:license" content="NE29X">
+    <link rel="shortcut icon" href="~/Themes/AdminPanel/ModiranTheme/images/favicon.png">
+
+    <!-- BEGIN CSS -->
+
+    <partial name="PartialViews/AdminPanel/_Styles" />
+    @RenderSection("Styles", false)
+
+    <!-- END CSS -->
+
+</head>
+
+<body class="active-ripple theme-darkpurple fix-header sidebar-extra bg-1">
+
+    <!-- BEGIN LOEADING -->
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- END LOEADING -->
+
+    <!-- HEADER -->
+    <partial name="PartialViews/AdminPanel/_Header" />
+
+    <div id="wrapper">
+
+        <!-- SIDEBAR -->
+        <partial name="PartialViews/AdminPanel/_Sidebar" />
+
+
+        <!-- BEGIN PAGE CONTENT -->
+
+        <div id="page-content">
+            <div id="inner-content">
+                <div class="row">
+
+                    <!-- BEGIN BREADCRUMB -->
+
+                    <div class="col-md-12">
+                        <div class="breadcrumb-box shadow">
+                            <ul class="breadcrumb">
+                                <li><a href="#">سیستم مدیریت</a></li>
+                                <li class="active">@ViewData["Breadcrumb"]</li>
+                            </ul>
+                            <div class="breadcrumb-left">
+                                @DateTime.Now.ToShamsi()
+                                <i class="icon-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END BREADCRUMB -->
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT -->
+
+    </div>
+
+    <!-- FOOTER-->
+    <partial name="PartialViews/AdminPanel/_Footer" />
+
+
+    @RenderSection("Modals", false)
+
+
+    <!-- BEGIN JS -->
+
+    <partial name="PartialViews/AdminPanel/_Scripts" />
+    @RenderSection("Scripts", false)
+
+    <!-- END JS -->
+
+</body>
+</html>

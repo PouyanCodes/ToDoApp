@@ -1,0 +1,86 @@
+﻿
+@model TodoApp.MVC.Models.TodoVMs.EditTodoVM
+
+@{
+    ViewData["Title"] = "ویرایش وظیفه";
+    ViewData["Breadcrumb"] = "ویرایش وظیفه";
+}
+
+<form asp-controller="Todo" asp-action="EditTodo" role="form" method="post">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <div class="row">
+        <div class="col-md-8 col-xl-9">
+            <div class="portlet box shadow">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                        <h3 class="title">
+                            <i class="icon-note"></i>
+                            ویرایش وظیفه
+                        </h3>
+                    </div>
+                    <div class="buttons-box">
+                        <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip"
+                           title="تمام صفحه" href="#">
+                            <i class="icon-size-fullscreen"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input asp-for="Title" type="text" class="form-control" placeholder="عنوان">
+                            </div>
+                            <span class="text-danger" asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <textarea asp-for="Description" class="form-control" placeholder="توضیحات"></textarea>
+                            </div>
+                            <span class="text-danger" asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success btn-round">
+                            <i class="icon-check"></i>
+                            ویرایش
+                            <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                        </button>
+                        <button type="reset" class="btn btn-warning btn-round">
+                            ریست
+                            <i class="icon-close"></i>
+                            <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xl-3">
+            <div class="portlet box shadow">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                        <h3 class="title">
+                            <i class="far fa-calendar"></i>
+                            زمان سررسید
+                        </h3>
+                    </div>
+                    <div class="buttons-box">
+                        <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip"
+                           title="کوچک کردن" href="#">
+                            <i class="icon-arrow-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-group">
+                        <label>تاریخ امروز:</label>
+                        <div class="input-group">
+                            <input asp-for="DeadLine" type="date" class="form-control">
+                        </div>
+                        <span class="text-danger" asp-validation-for="DeadLine"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

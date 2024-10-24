@@ -1,0 +1,127 @@
+﻿@using TodoApp.MVC.Contracts
+@using TodoApp.MVC.Tools.Convertors
+@inject ITodoService _todoService;
+
+@{
+    ViewData["Title"] = "مدیریت لیست وظایف";
+    ViewData["Breadcrumb"] = "مدیریت لیست وظایف";
+}
+
+@{
+    var todoList = _todoService.GetAll();
+}
+
+@section Styles
+{
+    <link href="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/DataTables-1.10.16/css/jquery.dataTables.css" rel="stylesheet">
+}
+
+<div class="portlet box shadow">
+    <div class="portlet-heading">
+        <div class="portlet-title">
+            <h3 class="title">
+                <i class="icon-frane"></i>
+                لیست وظایف
+            </h3>
+        </div>
+        <div class="buttons-box">
+            <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+            </a>
+            <div class="code-modal hide">
+            </div>
+            <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                <i class="icon-size-fullscreen"></i>
+            </a>
+            <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                <i class="icon-arrow-up"></i>
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="top-buttons-box mb-2">
+            <a class="btn btn-warning" href="/Todo/AddTodo">
+                <i class="icon-plus"></i>
+                افزودن
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped" id="data-table">
+                <thead>
+                    <tr>
+                        <th>عنوان</th>
+                        <th>تاریخ ایجاد</th>
+                        <th>تاریخ سررسید</th>
+                        <th>وضعیت</th>
+                        <td>عملیات</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var todo in todoList)
+                    {
+                        <tr>
+                            <td>@todo.Title</td>
+                            <td>@todo.CreateDate</td>
+                            <td>@todo.DeadLine</td>
+                            <td>
+
+                                @if(todo.Status == 1)
+                                {
+                                    <span class="label label-success">انجام شده</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-default">در دست انجام</span>
+                                }
+
+                            </td>
+                            <td>
+                                <a href="/Todo/CheckedTodo/@todo.Id" class="btn btn-round btn-icon btn-sm btn-info" rel="tooltip" aria-label="زدن تیک انجام وظیفه" data-bs-original-title="زدن تیک انجام وظیفه">
+                                    <i class="icon-check"></i>
+                                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                </a>
+
+                                <a href="/Todo/TodoInfo/@todo.Id" class="btn btn-round btn-icon btn-sm btn-primary" rel="tooltip" aria-label="مشاهده وظیفه" data-bs-original-title="مشاهده وظیفه">
+                                    <i class="icon-eye"></i>
+                                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                </a>
+
+                                <a href="/Todo/EditTodo/@todo.Id" class="btn btn-round btn-icon btn-sm btn-warning" rel="tooltip" aria-label="ویرایش وظیفه" data-bs-original-title="ویرایش وظیفه">
+                                    <i class="icon-note"></i>
+                                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                </a>
+
+                                <a onclick="GoDeleteModal('/Todo/DeleteTodo/@todo.Id')" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-round btn-icon btn-sm btn-danger" rel="tooltip" aria-label="حذف وظیفه" data-bs-original-title="حذف وظیفه">
+                                    <i class="icon-trash"></i>
+                                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Modals
+{
+    @await Html.PartialAsync("Modals/_deleteModal")
+}
+
+@section Scripts
+{
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/jquery.dataTables.min.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/dataTables.buttons.min.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/jszip.min.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/pdfmake.min.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/vfs_fonts-iransans.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/buttons.html5.min.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/buttons.print.min.js"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/plugins/data-table/js/export/fa.json"></script>
+    <script src="~/Themes/AdminPanel/ModiranTheme/js/pages/datatable-export.js"></script>
+}
